@@ -1,7 +1,9 @@
 # vpc_routing.tftest.hcl
+# Uses command = apply so that route table route values are known when assertions run
+# (route is populated only after apply; at plan time it would be "unknown").
 
 run "verify_public_routing" {
-  command = plan
+  command = apply
 
   # Assertion 1: Check if ANY routes exist in the route table
   assert {
@@ -17,7 +19,7 @@ run "verify_public_routing" {
 }
 
 run "verify_subnet_association" {
-  command = plan
+  command = apply
 
   # Assertion 3: Ensure the subnet is actually attached to the route table
   assert {

@@ -5,7 +5,7 @@ provider "aws" {
   access_key                  = "test"
   secret_key                  = "test"
   region                      = "us-east-1"
-  
+
   # Crucial settings to force Terraform to use LocalStack instead of real AWS
   s3_use_path_style           = true
   skip_credentials_validation = true
@@ -50,7 +50,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 # ==============================================================================
-# INTENTIONAL BUG BELOW: 
+# INTENTIONAL BUG BELOW:
 # The route table is created, but it lacks the actual route to the Internet Gateway.
 # ==============================================================================
 resource "aws_route_table" "public_rt" {
