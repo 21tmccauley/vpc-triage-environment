@@ -6,7 +6,7 @@ provider "aws" {
   secret_key                  = "test"
   region                      = "us-east-1"
 
-  # Crucial settings to force Terraform to use LocalStack instead of real AWS
+  # Settings to force Terraform to use LocalStack instead of real AWS
   s3_use_path_style           = true
   skip_credentials_validation = true
   skip_metadata_api_check     = true
@@ -56,7 +56,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.main_vpc.id
 
-  # Students will need to add the following block to fix the tests:
+  # You will need to add the following block to fix the tests:
   # route {
   #   cidr_block = "0.0.0.0/0"
   #   gateway_id = aws_internet_gateway.main_igw.id
