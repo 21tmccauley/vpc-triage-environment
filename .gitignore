@@ -26,3 +26,6 @@ Thumbs.db
 *.swo
 *~
 .cursorrules
+
+# Instructor-only docs
+ANSWER_KEY.md
