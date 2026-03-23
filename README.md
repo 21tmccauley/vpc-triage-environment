@@ -2,14 +2,15 @@
 
 This lab teaches Infrastructure as Code (IaC) and VPC networking by having you **diagnose and fix intentionally broken AWS-style networks** using Terraform and LocalStack—all running locally, with no cloud account or cost.
 
-**Two parts:**
+**Three parts:**
 
 | Part | Folder | Description |
 |------|--------|-------------|
 | **Part 1 — Walkthrough** | [part-1-walkthrough/](part-1-walkthrough/) | Guided. One VPC, one public subnet, one broken route table. Follow the walkthrough to fix it. |
-| **Part 2 — Challenge** | [part-2-challenge/](part-2-challenge/) | On your own. VPC with public and internal subnets; one route table is misconfigured. Use the tests to find and fix it. |
+| **Part 2 — Challenge** | [part-2-challenge/](part-2-challenge/) | On your own. VPC with public and app subnets; diagnose and fix the routing issue using test output only. |
+| **Part 3 — Design + Verify** | [part-3-design/](part-3-design/) | Build a three-subnet VPC from requirements and write your own Terraform tests to prove connectivity and isolation. |
 
-Do **Part 1 first**, then **Part 2**.
+Do **Part 1 first**, then **Part 2**, then **Part 3**.
 
 ---
 
@@ -47,6 +48,14 @@ Do **Part 1 first**, then **Part 2**.
    ```
    Fix the misconfiguration using only the test output and what you learned in Part 1. No full walkthrough.
 
+5. **Part 3 — Design + Verify**
+   ```bash
+   cd part-3-design
+   terraform init
+   terraform test
+   ```
+   Implement the required network resources and write your own `.tftest.hcl` assertions to validate both outbound routing and database isolation.
+
 ---
 
 ## Repository layout
@@ -61,7 +70,11 @@ vpc-triage-environment/
 │   ├── WALKTHROUGH.md        ← Step-by-step instructions
 │   ├── main.tf
 │   └── vpc_routing.tftest.hcl
-└── part-2-challenge/         ← Part 2: challenge (no walkthrough)
+├── part-2-challenge/         ← Part 2: challenge (no walkthrough)
+│   ├── README.md
+│   ├── main.tf
+│   └── vpc_routing.tftest.hcl
+└── part-3-design/            ← Part 3: write Terraform + write tests
     ├── README.md
     ├── main.tf
     └── vpc_routing.tftest.hcl

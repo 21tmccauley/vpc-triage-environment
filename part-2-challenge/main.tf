@@ -17,7 +17,7 @@ provider "aws" {
 }
 
 # ------------------------------------------------------------------------------
-# Part 2: VPC with Public and Internal Subnets
+# Part 2: VPC with Public and App Subnets
 # Two subnets, two route tables. One has a routing problem.
 # ------------------------------------------------------------------------------
 
@@ -50,13 +50,13 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
-# Internal subnet (10.0.2.0/24) — should use internal_rt for outbound traffic
-resource "aws_subnet" "internal_subnet" {
+# App subnet (10.0.2.0/24) — should use app_rt for outbound traffic
+resource "aws_subnet" "app_subnet" {
   vpc_id     = aws_vpc.main_vpc.id
   cidr_block = "10.0.2.0/24"
 
   tags = {
-    Name = "part2-internal-subnet"
+    Name = "part2-app-subnet"
   }
 }
 
@@ -74,19 +74,12 @@ resource "aws_route_table" "public_rt" {
   }
 }
 
-# Internal route table — INTENTIONAL BUG: missing default route to IGW
-# The internal subnet needs outbound internet; this route table has no route for it.
-resource "aws_route_table" "internal_rt" {
+# App route table — missing default route to IGW
+resource "aws_route_table" "app_rt" {
   vpc_id = aws_vpc.main_vpc.id
 
-  # Students must add a default route here, e.g.:
-  # route {
-  #   cidr_block = "0.0.0.0/0"
-  #   gateway_id = aws_internet_gateway.main_igw.id
-  # }
-
   tags = {
-    Name = "part2-internal-rt"
+    Name = "part2-app-rt"
   }
 }
 
@@ -95,7 +88,7 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-resource "aws_route_table_association" "internal_assoc" {
-  subnet_id      = aws_subnet.internal_subnet.id
-  route_table_id = aws_route_table.internal_rt.id
+resource "aws_route_table_association" "app_assoc" {
+  subnet_id      = aws_subnet.app_subnet.id
+  route_table_id = aws_route_table.app_rt.id
 }

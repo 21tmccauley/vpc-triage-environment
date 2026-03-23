@@ -8,7 +8,8 @@
 - [ ] I ran `terraform init` successfully
 - [ ] I completed Part 1 and ran `terraform test` (fixed failing tests)
 - [ ] I completed Part 2 challenge and ran `terraform test` (fixed failing tests)
-- [ ] I included screenshots showing passing tests for Part 1 and Part 2
+- [ ] I completed Part 3 design challenge and ran `terraform test` (wrote Terraform + tests)
+- [ ] I included screenshots showing passing tests for Parts 1, 2, and 3
 - [ ] I answered all questions in this document
 
 ---
@@ -94,7 +95,7 @@ Add screenshots below.
 
 ---
 
-## Part 2 Challenge (Public + Internal Subnets)
+## Part 2 Challenge (Public + App Subnets)
 
 Answer in complete sentences.
 
@@ -107,7 +108,7 @@ Answer in complete sentences.
 3. What exact change did you make in `part-2-challenge/main.tf` to fix the failing test(s)?
 **Answer:**
 
-4. Explain why the internal subnet also needs a default route to the Internet Gateway in this lab. (Relate your answer to outbound traffic.)
+4. Explain why the app subnet also needs a default route to the Internet Gateway in this lab. (Relate your answer to outbound traffic.)
 **Answer:**
 
 ---
@@ -126,6 +127,47 @@ Answer in complete sentences.
 
 ### Optional Screenshot 3 - Part 2 Code Fix in `main.tf`
 
-- Show the `route` block that fixed the issue (typically inside the internal route table).
+- Show the `route` block that fixed the issue (typically inside the app route table).
+
+---
+
+## Part 3 Design Challenge (Write Terraform + Write Tests)
+
+Answer in complete sentences.
+
+1. Which Terraform resources did you create in `part-3-design/main.tf`, and what role does each one play in the network?
+**Answer:**
+
+2. What CIDR block did you assign to each subnet (`web_subnet`, `app_subnet`, `db_subnet`), and why must each one fit inside the VPC CIDR?
+**Answer:**
+
+3. Which route tables include a `0.0.0.0/0` default route, and which route table should not include one?
+**Answer:**
+
+4. What assertions did you write in `part-3-design/vpc_routing.tftest.hcl` to validate routing for web and app subnets?
+**Answer:**
+
+5. How did you write a negative assertion to prove the database route table does not contain a default route?
+**Answer:**
+
+6. How did you verify each subnet was associated with the correct route table?
+**Answer:**
+
+---
+
+## Part 3 Evidence (Screenshots Required)
+
+### Required Screenshot 1 - Part 3 Passing Tests
+
+- Show a `terraform test` run in `part-3-design/` where all tests pass.
+- Must include the final success output.
+
+### Required Screenshot 2 - Part 3 Terraform Configuration
+
+- Show the key resources you wrote in `part-3-design/main.tf` (VPC, subnets, route tables, associations).
+
+### Required Screenshot 3 - Part 3 Test Definitions
+
+- Show your `run` blocks and assertions in `part-3-design/vpc_routing.tftest.hcl`.
 
 

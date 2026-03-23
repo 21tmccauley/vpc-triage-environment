@@ -1,4 +1,4 @@
-# vpc_routing.tftest.hcl — Part 2: public + internal subnets, both need correct routing
+# vpc_routing.tftest.hcl — Part 2: public + app subnets, both need correct routing
 
 run "verify_public_routing" {
   command = apply
@@ -14,17 +14,17 @@ run "verify_public_routing" {
   }
 }
 
-run "verify_internal_routing" {
+run "verify_app_routing" {
   command = apply
 
   assert {
-    condition     = length(aws_route_table.internal_rt.route) > 0
-    error_message = "NETWORK OUTAGE: The internal route table is empty. The internal subnet has no path for outbound traffic."
+    condition     = length(aws_route_table.app_rt.route) > 0
+    error_message = "NETWORK OUTAGE: The app route table is empty. The app subnet has no path for outbound traffic."
   }
 
   assert {
-    condition     = length([for r in aws_route_table.internal_rt.route : r if r.cidr_block == "0.0.0.0/0"]) > 0
-    error_message = "ROUTING ERROR: The internal route table is missing a default route (0.0.0.0/0). Add a route to the Internet Gateway so the internal subnet can reach the internet."
+    condition     = length([for r in aws_route_table.app_rt.route : r if r.cidr_block == "0.0.0.0/0"]) > 0
+    error_message = "ROUTING ERROR: The app route table is missing a default route (0.0.0.0/0). Add a route to the Internet Gateway so the app subnet can reach the internet."
   }
 }
 
@@ -37,7 +37,7 @@ run "verify_subnet_associations" {
   }
 
   assert {
-    condition     = aws_route_table_association.internal_assoc.subnet_id == aws_subnet.internal_subnet.id
-    error_message = "ASSOCIATION ERROR: The internal subnet is not associated with the internal route table."
+    condition     = aws_route_table_association.app_assoc.subnet_id == aws_subnet.app_subnet.id
+    error_message = "ASSOCIATION ERROR: The app subnet is not associated with the app route table."
   }
 }

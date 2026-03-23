@@ -1,4 +1,4 @@
-# Part 2: Challenge — Public and Internal Subnets
+# Part 2: Challenge — Public and App Subnets
 
 This is the **challenge** part of the lab. There is no step-by-step walkthrough. Use what you learned in Part 1 to find and fix the networking problem.
 
@@ -7,11 +7,11 @@ This is the **challenge** part of the lab. There is no step-by-step walkthrough.
 - One VPC (10.0.0.0/16)
 - **Two subnets:**
   - Public subnet (10.0.1.0/24) — has a route table with a default route to the Internet Gateway
-  - Internal subnet (10.0.2.0/24) — has its own route table that should also allow outbound traffic to the internet
+  - App subnet (10.0.2.0/24) — has its own route table that should also allow outbound traffic to the internet
 - One Internet Gateway
-- Two route tables (public_rt and internal_rt) and two subnet associations
+- Two route tables (public_rt and app_rt) and two subnet associations
 
-**Problem:** One of the route tables is misconfigured. The tests will fail and tell you which one. Your job is to fix it.
+Your job is to run the tests, diagnose the routing issue, and fix the configuration.
 
 ## Instructions
 
