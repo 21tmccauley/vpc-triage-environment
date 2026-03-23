@@ -27,17 +27,11 @@ Your job is to run the tests, diagnose the routing issue, and fix the configurat
    terraform test
    ```
 
-3. **Read the test output.** The failing assertions and error messages tell you what is wrong (e.g. which route table is missing a route).
+3. **Read the test output.** The failing assertions and error messages tell you what is wrong.
 
 4. **Fix the configuration** in `main.tf`. No walkthrough is provided — use the test messages and your experience from Part 1.
 
 5. **Re-run the tests** until you see all runs pass and **Success!** at the end.
-
-## Hints
-
-- The same kind of routing concept from Part 1 applies here: a subnet needs a default route (0.0.0.0/0) to reach the internet.
-- There are two route tables. One is already correct; the other is missing a route.
-- The fix is in `main.tf` only; you do not need to change the test file.
 
 ## Reference
 

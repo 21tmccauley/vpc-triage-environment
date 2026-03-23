@@ -18,7 +18,7 @@ provider "aws" {
 
 # ------------------------------------------------------------------------------
 # Part 2: VPC with Public and App Subnets
-# Two subnets, two route tables. One has a routing problem.
+# Two subnets and two route tables for troubleshooting practice.
 # ------------------------------------------------------------------------------
 
 resource "aws_vpc" "main_vpc" {
@@ -39,7 +39,7 @@ resource "aws_internet_gateway" "main_igw" {
   }
 }
 
-# Public subnet (10.0.1.0/24) — has its own route table with default route to IGW
+# Public subnet (10.0.1.0/24)
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.main_vpc.id
   cidr_block              = "10.0.1.0/24"
@@ -50,7 +50,7 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
-# App subnet (10.0.2.0/24) — should use app_rt for outbound traffic
+# App subnet (10.0.2.0/24)
 resource "aws_subnet" "app_subnet" {
   vpc_id     = aws_vpc.main_vpc.id
   cidr_block = "10.0.2.0/24"
@@ -60,7 +60,7 @@ resource "aws_subnet" "app_subnet" {
   }
 }
 
-# Public route table — correctly has default route to IGW
+# Public route table
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.main_vpc.id
 
@@ -74,7 +74,7 @@ resource "aws_route_table" "public_rt" {
   }
 }
 
-# App route table — missing default route to IGW
+# App route table
 resource "aws_route_table" "app_rt" {
   vpc_id = aws_vpc.main_vpc.id
 
