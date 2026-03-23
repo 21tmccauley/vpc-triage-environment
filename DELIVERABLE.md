@@ -94,19 +94,7 @@ Add screenshots below.
 
 ---
 
-## Part E - Part 1 Command Log
-
-List the commands you ran for Part 1 in order.
-
-```bash
-# Example:
-# terraform init
-# terraform test
-```
-
----
-
-## Part F - Part 2 Challenge (Public + Internal Subnets)
+## Part 2 Challenge (Public + Internal Subnets)
 
 Answer in complete sentences.
 
@@ -124,7 +112,7 @@ Answer in complete sentences.
 
 ---
 
-## Part G - Part 2 Evidence (Screenshots Required)
+## Part 2 Evidence (Screenshots Required)
 
 ### Required Screenshot 1 - Part 2 Initial Failure
 
@@ -140,15 +128,4 @@ Answer in complete sentences.
 
 - Show the `route` block that fixed the issue (typically inside the internal route table).
 
----
 
-## Part H - Part 2 Command Log
-
-List the commands you ran for Part 2 in order.
-
-```bash
-# Example:
-# cd part-2-challenge
-# terraform init
-# terraform test
-```
